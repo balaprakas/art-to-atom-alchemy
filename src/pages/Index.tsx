@@ -8,6 +8,7 @@ import { Navigation } from "@/components/Navigation";
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [coverData, setCoverData] = useState({ title: "", author: "" });
+  const [builderResponses, setBuilderResponses] = useState<string[]>(["", "", ""]);
   const [storyPagesData, setStoryPagesData] = useState<Array<{ image?: string; text?: string }>>([
     {}, {}, {}, {}, {}, {}, {}
   ]);
@@ -31,7 +32,15 @@ const Index = () => {
       onAuthorChange={(author) => setCoverData(prev => ({ ...prev, author }))}
     />,
     <InstructionsPage key="instructions" />,
-    <StoryBuilderPage key="builder" />,
+    <StoryBuilderPage 
+      key="builder"
+      responses={builderResponses}
+      onResponseChange={(index, value) => {
+        const newResponses = [...builderResponses];
+        newResponses[index] = value;
+        setBuilderResponses(newResponses);
+      }}
+    />,
     ...storyPrompts.map((prompt, index) => (
       <StoryPage 
         key={`story-${index}`}

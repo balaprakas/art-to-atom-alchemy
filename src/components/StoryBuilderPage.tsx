@@ -1,6 +1,12 @@
 import { Card } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
 
-export const StoryBuilderPage = () => {
+interface StoryBuilderPageProps {
+  responses?: string[];
+  onResponseChange?: (index: number, value: string) => void;
+}
+
+export const StoryBuilderPage = ({ responses = [], onResponseChange }: StoryBuilderPageProps) => {
   const prompts = [
     {
       title: "Introduce your Character",
@@ -55,11 +61,12 @@ export const StoryBuilderPage = () => {
                   </div>
                   
                   {/* Writing Space */}
-                  <div className="mt-6 p-6 bg-white/80 rounded-2xl border-2 border-dashed border-primary/30 min-h-[120px]">
-                    <p className="font-caveat text-xl text-muted-foreground italic">
-                      Write your ideas here...
-                    </p>
-                  </div>
+                  <Textarea
+                    value={responses[index] || ""}
+                    onChange={(e) => onResponseChange?.(index, e.target.value)}
+                    placeholder="Write your ideas here..."
+                    className="mt-6 min-h-[120px] font-caveat text-xl border-2 border-dashed border-primary/30 focus:border-primary bg-white/80 resize-none"
+                  />
                 </div>
               </Card>
             ))}
