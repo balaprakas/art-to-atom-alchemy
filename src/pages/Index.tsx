@@ -7,6 +7,10 @@ import { Navigation } from "@/components/Navigation";
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(0);
+  const [coverData, setCoverData] = useState({ title: "", author: "" });
+  const [storyPagesData, setStoryPagesData] = useState<Array<{ image?: string; text?: string }>>([
+    {}, {}, {}, {}, {}, {}, {}
+  ]);
 
   const storyPrompts = [
     "Hey there… who's that with the bouncy curls and sparkly eyes?",
@@ -19,7 +23,13 @@ const Index = () => {
   ];
 
   const pages = [
-    <CoverPage key="cover" />,
+    <CoverPage 
+      key="cover" 
+      title={coverData.title}
+      author={coverData.author}
+      onTitleChange={(title) => setCoverData(prev => ({ ...prev, title }))}
+      onAuthorChange={(author) => setCoverData(prev => ({ ...prev, author }))}
+    />,
     <InstructionsPage key="instructions" />,
     <StoryBuilderPage key="builder" />,
     ...storyPrompts.map((prompt, index) => (
@@ -28,6 +38,18 @@ const Index = () => {
         pageNumber={index + 1}
         prompt={prompt}
         imagePosition={index % 2 === 0 ? "left" : "right"}
+        image={storyPagesData[index]?.image}
+        text={storyPagesData[index]?.text}
+        onImageChange={(image) => {
+          const newData = [...storyPagesData];
+          newData[index] = { ...newData[index], image };
+          setStoryPagesData(newData);
+        }}
+        onTextChange={(text) => {
+          const newData = [...storyPagesData];
+          newData[index] = { ...newData[index], text };
+          setStoryPagesData(newData);
+        }}
       />
     ))
   ];

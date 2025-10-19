@@ -2,7 +2,14 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import heroIllustration from "@/assets/hero-illustration.jpg";
 
-export const CoverPage = () => {
+interface CoverPageProps {
+  title?: string;
+  author?: string;
+  onTitleChange?: (title: string) => void;
+  onAuthorChange?: (author: string) => void;
+}
+
+export const CoverPage = ({ title, author, onTitleChange, onAuthorChange }: CoverPageProps) => {
   return (
     <div className="min-h-screen bg-gradient-warm flex flex-col items-center justify-center p-8 relative overflow-hidden">
       {/* Decorative Background Elements */}
@@ -42,6 +49,8 @@ export const CoverPage = () => {
               Story Title
             </label>
             <Input 
+              value={title || ""}
+              onChange={(e) => onTitleChange?.(e.target.value)}
               placeholder="Enter your story title..." 
               className="font-caveat text-2xl h-14 border-2 border-primary/30 focus:border-primary bg-white/90"
             />
@@ -52,6 +61,8 @@ export const CoverPage = () => {
               Author
             </label>
             <Input 
+              value={author || ""}
+              onChange={(e) => onAuthorChange?.(e.target.value)}
               placeholder="Your name..." 
               className="font-caveat text-2xl h-14 border-2 border-secondary/30 focus:border-secondary bg-white/90"
             />
