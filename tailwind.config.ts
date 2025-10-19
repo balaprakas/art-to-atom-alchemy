@@ -13,6 +13,19 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        'bubblegum': ['Bubblegum Sans', 'cursive'],
+        'caveat': ['Caveat', 'cursive'],
+        'patrick': ['Patrick Hand', 'cursive'],
+      },
+      backgroundImage: {
+        'gradient-magical': 'var(--gradient-magical)',
+        'gradient-warm': 'var(--gradient-warm)',
+      },
+      boxShadow: {
+        'playful': 'var(--shadow-playful)',
+        'soft': 'var(--shadow-soft)',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
