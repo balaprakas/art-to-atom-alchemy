@@ -59,10 +59,8 @@ const SortableThumbnail = ({ thumbnail, isActive, onClick }: SortableThumbnailPr
     <div
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
       className={cn(
-        "flex-shrink-0 w-16 h-20 rounded-lg border-2 cursor-pointer transition-all touch-none",
+        "flex-shrink-0 w-16 h-20 rounded-lg border-2 cursor-pointer transition-all",
         isActive
           ? "border-primary shadow-lg scale-110"
           : "border-border hover:border-primary/50",
