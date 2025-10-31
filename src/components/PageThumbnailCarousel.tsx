@@ -196,7 +196,10 @@ export const PageThumbnailCarousel = ({
                   <Plus className="h-6 w-6 text-primary/50" />
                 </Button>
               </div>
-              <ScrollBar orientation="horizontal" />
+              <ScrollBar 
+                orientation="horizontal" 
+                className="h-1.5 opacity-0 hover:opacity-100 transition-opacity touch-none"
+              />
             </ScrollArea>
           </SortableContext>
         </DndContext>
