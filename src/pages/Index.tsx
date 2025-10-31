@@ -3,10 +3,11 @@ import { CoverPage } from "@/components/CoverPage";
 import { InstructionsPage } from "@/components/InstructionsPage";
 import { StoryBuilderPage } from "@/components/StoryBuilderPage";
 import { StoryPage } from "@/components/StoryPage";
-import { Navigation } from "@/components/Navigation";
+import { PageThumbnailCarousel } from "@/components/PageThumbnailCarousel";
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(0);
+  const [pageOrder, setPageOrder] = useState<number[]>([]);
   const [coverData, setCoverData] = useState({ title: "", author: "" });
   const [builderResponses, setBuilderResponses] = useState<string[]>(["", "", ""]);
   const [storyPagesData, setStoryPagesData] = useState<Array<{ image?: string; text?: string }>>([
@@ -77,14 +78,25 @@ const Index = () => {
     }
   };
 
+  const handlePageClick = (pageIndex: number) => {
+    setCurrentPage(pageIndex);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handlePagesReorder = (newOrder: number[]) => {
+    setPageOrder(newOrder);
+    // Reorder logic can be enhanced to actually reorder pages array if needed
+    console.log("New page order:", newOrder);
+  };
+
   return (
-    <main className="relative">
+    <main className="relative pb-32">
       {pages[currentPage]}
-      <Navigation 
+      <PageThumbnailCarousel
         currentPage={currentPage}
         totalPages={pages.length}
-        onNext={handleNext}
-        onPrevious={handlePrevious}
+        onPageClick={handlePageClick}
+        onPagesReorder={handlePagesReorder}
       />
     </main>
   );
