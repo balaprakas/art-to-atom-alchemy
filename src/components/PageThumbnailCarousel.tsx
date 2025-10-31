@@ -198,7 +198,7 @@ export const PageThumbnailCarousel = ({
               </div>
               <ScrollBar 
                 orientation="horizontal" 
-                className="h-1.5 opacity-0 hover:opacity-100 transition-opacity touch-none"
+                className="h-2"
               />
             </ScrollArea>
           </SortableContext>
